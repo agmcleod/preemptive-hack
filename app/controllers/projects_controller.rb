@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
       @project = Project.new(project_params)
     end
     if @project.save
-      redirect_to hackday_path(@project.hackday_id), notice: "Project successfully added"
+      redirect_to hackday_url(@project.hackday_id), notice: "Project successfully added"
     else
       render :new
     end
@@ -20,6 +20,6 @@ class ProjectsController < ApplicationController
 
 private
   def project_params
-    params.require(:project).permit(:name, :description)
+    params.require(:project).permit(:name, :description, :hackday_id)
   end
 end

@@ -8,6 +8,7 @@ class Project < ActiveRecord::Base
       old_project = Project.find id
       project = Project.new
       project.attributes = old_project.attributes
+      project.id = nil
       project.save!
       project
     end

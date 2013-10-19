@@ -17,11 +17,11 @@ feature 'Project Creation' do
 
   scenario 'duplicate existing project' do
     goto_valid_hackday
-    ho = FactoryGirl.create :hackday_organization
-    hd = FactoryGirl.create :hackday, hackday_organization: ho
-    FactoryGirl.create :project, hackday: hd
-    project = FactoryGirl.create :project, hackday: @hackday
+    hd = FactoryGirl.create :hackday, hackday_organization: @hackday_org
+    project = FactoryGirl.create :project, hackday: hd
     click_link 'Add Project'
-    select project.id, from: 'existing_project_id'
+    select project.name, from: 'existing_project_id'
+    click_button 'Save'
+    expect(page).to have_content('')
   end
 end
