@@ -8,7 +8,14 @@ feature 'Create hackday org' do
   end
   scenario 'valid name' do
     goto_new_page
-    fill_in 'name', with: "Ruby Hacknight"
+    fill_in 'hackday_organization[name]', with: "Ruby Hacknight"
+    click_button 'Save'
     expect(page).to have_content('Ruby Hacknight')
+  end
+
+  scenario 'invalid name' do
+    goto_new_page
+    click_button 'Save'
+    expect(page).to have_content('1 error prohibited')
   end
 end
