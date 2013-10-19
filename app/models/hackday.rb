@@ -3,8 +3,6 @@ class Hackday < ActiveRecord::Base
   has_many :projects
   include HackdayConcerns
 
-  default_scope lambda { order('start_date desc') }
-
   validates :start_date, presence: true
   validate :start_before_end
 
