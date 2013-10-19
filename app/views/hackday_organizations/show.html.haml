@@ -1,12 +1,17 @@
 %h1= @hackday_organization.name
 
-%p= link_to 'Create new Hackday', new_hackday_organization_hackday_path(@hackday_organization)
-
-%h3 Upcoming Hackdays:
-
-%ul
-  - @hackday_organization.hackdays.each do |hackday|
-    %li= link_to hackday.start_date, [@hackday_organization, hackday]
-
 = link_to 'Edit', edit_hackday_organization_path(@hackday_organization)
-= link_to 'Back', hackday_organizations_path
+.hackdays
+  %p= link_to 'Create new Hackday', new_hackday_organization_hackday_path(@hackday_organization)
+
+  %h3 Upcoming Hackdays:
+  %ul
+    - @hackday_organization.hackdays.each do |hackday|
+      %li= link_to hackday.start_date_formatted, [@hackday_organization, hackday]
+
+.members
+  %h3 Members:
+  - @hackday_organization.users.each do |user|
+    %li= user.username
+  = button_to 'Add Test User', users_path(hackday_organization_id: @hackday_organization.id), class: 'btn btn-info'
+= link_to 'Back to organizations', hackday_organizations_path

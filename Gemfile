@@ -32,11 +32,11 @@ group :development, :test do
   gem 'pg'
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'faker'
 end
 
 group :test do
   gem 'factory_girl_rails'
-  gem 'faker'
   gem 'capybara'
   gem 'database_cleaner'
 end

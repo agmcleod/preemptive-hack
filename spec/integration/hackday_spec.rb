@@ -16,13 +16,3 @@ feature 'add to hackday org' do
     expect(page).to have_content('Starts at: 2013-10-19 00:00:00')
   end
 end
-
-feature 'add test user' do
-  scenario 'clicks button' do
-    h = FactoryGirl.create(:hackday_organization)
-    hd = FactoryGirl.create(:hackday, hackday_organization: h)
-    visit hackday_organizations_path
-    click_link h.name
-    click_link hd.start_date_formatted
-  end
-end
