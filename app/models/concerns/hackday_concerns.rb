@@ -13,14 +13,13 @@ module HackdayConcerns
 
   def sync_hardware(ids_hash)
     ids_to_keep = []
-    join_records = ids_hash.collect do |id, checked|
-      if checked.to_i == 1
-        ids_to_keep << id
-        hardwares_hackdays.build(hardware_id: id) unless has_hardware_id?(id)
-      end
-    end.compact
     Hackday.transaction do
-      join_records.each { |jr| jr.save }
+      ids_hash.each do |id, checked|
+        if checked.to_i == 1
+          ids_to_keep << id
+          hardwares_hackdays.create(hardware_id: id) unless has_hardware_id?(id)
+        end
+      end
       HardwaresHackdays.where('hackday_id = ? AND hardware_id NOT IN (?)', self.id, ids_to_keep).destroy_all
     end
   end
