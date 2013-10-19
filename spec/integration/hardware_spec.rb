@@ -10,5 +10,11 @@ feature 'listing hardware' do
 end
 
 feature 'Add hardware to organization' do
-  
+  scenario 'valid information' do
+    hdo = FactoryGirl.create :hackday_organization
+    visit hackday_organization_path(hdo)
+    click_link 'Add Hardware Item'
+    fill_in 'Name', with: 'Raspberry Pi'
+    click_button 'Add'
+  end
 end

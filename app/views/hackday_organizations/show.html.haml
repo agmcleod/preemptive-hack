@@ -18,5 +18,6 @@
 
 .hardware
   %h3 Hardware:
+  = link_to 'Add Hardware Item', new_hackday_organization_hardware_path(@hackday_organization)
   - Hardware.for_hackday_organization(@hackday_organization).each do |hardware|
     %li= hardware.name
