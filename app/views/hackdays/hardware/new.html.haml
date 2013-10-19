@@ -1,9 +1,16 @@
 %h1 Add the following hardware to the hackday
 
 = form_tag hackday_hardware_index_path(hackday_id: @hackday.id) do
+  - if @hackday.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@hackday.errors.count, "error")} prohibited this hackday from being saved:"
+      %ul
+        - @hackday.errors.full_messages.each do |msg|
+          %li= msg
+      
   - @hardwares.each do |hardware|
     .field
       = check_box_tag "hardware_ids[#{hardware.id}]", 1, @hackday.has_hardware?(hardware), id: "hardware_ids_#{hardware.id}"
       = label_tag "hardware_ids_#{hardware.id}", hardware.name, class: 'inline'
   .field
-    = submit_tag 'Add', class: 'btn btn-primary'
+    = submit_tag 'Save', class: 'btn btn-primary'

@@ -2,12 +2,10 @@ class Hackdays::HardwareController < ApplicationController
   before_filter :load_hackday
 
   def create
-    params[:hardware_ids].each do |id, checked|
-      @hackday.hardwares_hackdays.build(hardware_id: id) unless @hackday.has_hardware_id?(id)
-    end
-    if @hackday.save
+    if @hackday.sync_hardware(params[:hardware_ids])
       redirect_to @hackday, notice: "Hardware items added to hackday"
     else
+      @hardwares = Hardware.for_hackday_organization(@hackday.hackday_organization_id)
       render :new
     end
   end
