@@ -1,19 +1,4 @@
 %h1 Listing hackday_organizations
 
-%table
-  %tr
-    %th Name
-    %th
-    %th
-    %th
-
-  - @hackday_organizations.each do |hackday_organization|
-    %tr
-      %td= hackday_organization.name
-      %td= link_to 'Show', hackday_organization
-      %td= link_to 'Edit', edit_hackday_organization_path(hackday_organization)
-      %td= link_to 'Destroy', hackday_organization, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Hackday organization', new_hackday_organization_path
+= link_to 'New Hackday Organization', new_hackday_organization_path
+= render @hackday_organizations

@@ -1,5 +1,5 @@
 Preemptivehack::Application.routes.draw do
-  root to: 'hackday_organizations#index'
+  root to: 'dashboard#index'
   resources :hackday_organizations
   resources :users, only: [:create, :index, :new]
 end
