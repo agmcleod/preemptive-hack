@@ -1,0 +1,2 @@
+module HackdayOrganizationsHelper
+end

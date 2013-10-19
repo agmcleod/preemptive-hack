@@ -51,8 +51,20 @@ GEM
     diff-lcs (1.2.4)
     erubis (2.7.0)
     execjs (2.0.2)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
     faker (1.2.0)
       i18n (~> 0.5)
+    haml (4.0.3)
+      tilt
+    haml-rails (0.4)
+      actionpack (>= 3.1, < 4.1)
+      activesupport (>= 3.1, < 4.1)
+      haml (>= 3.1, < 4.1)
+      railties (>= 3.1, < 4.1)
     highline (1.6.20)
     hike (1.2.3)
     i18n (0.6.5)
@@ -161,7 +173,10 @@ DEPENDENCIES
   capistrano (~> 2.15)
   capybara
   database_cleaner
+  factory_girl_rails
   faker
+  haml
+  haml-rails
   jbuilder (~> 1.0.1)
   jquery-rails
   mysql2
