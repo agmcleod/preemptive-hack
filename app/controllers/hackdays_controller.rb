@@ -1,5 +1,6 @@
 class HackdaysController < ApplicationController
-  before_action :load_hackday_organization
+  before_action :load_hackday_organization, only: [:create, :new]
+  before_action :load_hackday_organization_from_hackday, only: [:edit, :show, :update]
 
   def create
     @hackday = @hackday_organization.hackdays.build(hackday_params)
@@ -34,12 +35,12 @@ class HackdaysController < ApplicationController
 private
 
   def load_hackday_organization
-    if params[:hackday_organization_id]
-      @hackday_organization = HackdayOrganization.find params[:hackday_organization_id]
-    else
-      @hackday = Hackday.find params[:id]
-      @hackday_organization = @hackday.hackday_organization
-    end
+    @hackday_organization = HackdayOrganization.find params[:hackday_organization_id]
+  end
+
+  def load_hackday_organization_from_hackday
+    @hackday = Hackday.find params[:id]
+    @hackday_organization = @hackday.hackday_organization
   end
 
   def hackday_params

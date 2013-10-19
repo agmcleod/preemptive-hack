@@ -1,9 +1,12 @@
 class Hackday < ActiveRecord::Base
   belongs_to :hackday_organization
-  has_many :projects
+  has_many :projects, dependent: :destroy
+  has_many :hardwares_hackdays, class_name: HardwaresHackdays, dependent: :destroy
+  has_many :hardwares, through: :hardwares_hackdays
   include HackdayConcerns
 
   validates :start_date, presence: true
+  validates :hackday_organization, presence: true
   validate :start_before_end
 
 private

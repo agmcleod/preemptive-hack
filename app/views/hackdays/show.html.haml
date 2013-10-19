@@ -6,6 +6,12 @@
 
 .projects
   - @hackday.projects.each do |project|
-    .project= render project
+    = render project
+  = link_to 'Add Project', new_project_path(hackday_id: @hackday.id)
 
-= link_to 'Add Project', new_project_path(hackday_id: @hackday.id)
+%h3 Hardware
+
+.hardwares
+  - @hackday.hardwares.each do |hardware|
+    = render hardware
+  = link_to 'Add Hardware', new_hackday_hardware_path(@hackday)

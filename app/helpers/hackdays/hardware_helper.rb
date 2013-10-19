@@ -1,0 +1,2 @@
+module Hackdays::HardwareHelper
+end

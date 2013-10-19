@@ -1,0 +1,9 @@
+%h1 Add the following hardware to the hackday
+
+= form_tag hackday_hardware_index_path(hackday_id: @hackday.id) do
+  - @hardwares.each do |hardware|
+    .field
+      = check_box_tag "hardware_ids[#{hardware.id}]", 1, @hackday.has_hardware?(hardware), id: "hardware_ids_#{hardware.id}"
+      = label_tag "hardware_ids_#{hardware.id}", hardware.name, class: 'inline'
+  .field
+    = submit_tag 'Add', class: 'btn btn-primary'

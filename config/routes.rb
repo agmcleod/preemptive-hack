@@ -4,7 +4,9 @@ Preemptivehack::Application.routes.draw do
     resources :hackdays, except: [:destroy, :index]
     resources :hardwares, only: [:create, :new]
   end
-  resources :hackdays, only: :show
+  resources :hackdays, only: :show do
+    resources :hardware, only: [:create, :new], controller: 'hackdays/hardware'
+  end
   resources :users, only: [:create, :index, :new]
   resources :projects, except: [:destroy, :index]
 end
