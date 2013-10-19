@@ -11,10 +11,3 @@ test: &test
   database: preemptivehack_test
   host: localhost
   pool: 5
-
-proudction:
-  adapter: mysql2
-  encoding: unicode
-  database: preemptivehack_production
-  host: localhost
-  pool: 5
