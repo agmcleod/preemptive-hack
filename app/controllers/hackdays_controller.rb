@@ -11,7 +11,7 @@ class HackdaysController < ApplicationController
   end
 
   def edit
-    @hackday = Hackday.find params[:id]
+    @hackday ||= Hackday.find params[:id]
   end
 
   def new
@@ -19,11 +19,11 @@ class HackdaysController < ApplicationController
   end
 
   def show
-    @hackday = Hackday.find params[:id]
+    @hackday ||= Hackday.find params[:id]
   end
 
   def update
-    @hackday = Hackday.find params[:id]
+    @hackday ||= Hackday.find params[:id]
     if @hackday.update_attributes(hackday_params)
       redirect_to [@hackday_organization, @hackday], notice: "Hackday information successfully updated"
     else
@@ -34,7 +34,12 @@ class HackdaysController < ApplicationController
 private
 
   def load_hackday_organization
-    @hackday_organization = HackdayOrganization.find params[:hackday_organization_id]
+    if params[:hackday_organization_id]
+      @hackday_organization = HackdayOrganization.find params[:hackday_organization_id]
+    else
+      @hackday = Hackday.find params[:id]
+      @hackday_organization = @hackday.hackday_organization
+    end
   end
 
   def hackday_params

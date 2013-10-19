@@ -1,5 +1,6 @@
 class Hackday < ActiveRecord::Base
   belongs_to :hackday_organization
+  has_many :projects
   include HackdayConcerns
 
   default_scope lambda { order('start_date desc') }

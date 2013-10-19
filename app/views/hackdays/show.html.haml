@@ -1,3 +1,11 @@
 %h2 Upcoming Hackday for #{@hackday_organization.name}
 
 %p Starts at: #{@hackday.start_date_formatted}
+
+%h3 Projects:
+
+.projects
+  - @hackday.projects.each do |project|
+    .project= render project
+
+= link_to 'Add Project', new_project_path(hackday_id: @hackday.id)

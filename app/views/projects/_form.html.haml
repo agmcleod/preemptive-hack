@@ -1,0 +1,14 @@
+= form_for project do |f|
+  = hidden_field_tag 'hackday_id', hackday_id
+  %fieldset
+    = select_tag 'existing_project_id', options_from_collection_for_select(projects, 'id', 'name'), prompt: ''
+  %fieldset
+    .field
+      = f.label :name
+      = f.text_field :name
+    .field
+      = f.label :description
+      %br
+      = f.text_field :description
+    .field
+      = f.submit 'Save', class: 'btn btn-primary'
