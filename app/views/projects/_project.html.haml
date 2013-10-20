@@ -1,3 +1,10 @@
-.hardware
-  %h4= project.name
+.project
+  %h4= link_to project.name, edit_project_path(project, hackday_id: hackday_id)
   %p= project.description
+
+  - if project.hardwares.any?
+    %p
+      %strong Hardware
+    %ul
+      - project.hardwares.each do |hardware|
+        %li= hardware.name

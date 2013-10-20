@@ -1,14 +1,19 @@
 = form_for project do |f|
   = f.hidden_field :hackday_id, value: hackday_id
-  %fieldset
-    = select_tag 'existing_project_id', options_from_collection_for_select(projects, 'id', 'name'), prompt: ''
+  - unless projects.nil?
+    %fieldset
+      = select_tag 'existing_project_id', options_from_collection_for_select(projects, 'id', 'name'), prompt: ''
   %fieldset
     .field
       = f.label :name
       = f.text_field :name
     .field
       = f.label :description
-      %br
-      = f.text_field :description
+      = f.text_area :description
+    - if !hardwares.nil? && hardwares.any?
+      %p Include Hardware:
+      - hardwares.each do |hardware|
+        = f.check_box "hardware_ids", id: "project_hardware_ids_#{hardware.id}"
+        = f.label "hardware_ids_#{hardware.id}", hardware.name
     .field
       = f.submit 'Save', class: 'btn btn-primary'

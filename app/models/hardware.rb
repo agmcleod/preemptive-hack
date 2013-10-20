@@ -2,6 +2,8 @@ class Hardware < ActiveRecord::Base
   belongs_to :hackday_organization
   has_many :hardwares_hackdays, class_name: HardwaresHackdays
   has_many :hackdays, through: :hardwares_hackdays
+  has_many :projects_hardware
+  has_many :projects, through: :projects_hardware
 
   validates :name, presence: true, uniqueness: true
 
