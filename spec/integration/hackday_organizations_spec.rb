@@ -31,7 +31,7 @@ feature 'add test user' do
   end
 end
 
-feature 'listing hardware' do
+feature 'listing hackday org hardware' do
   scenario 'hardware created' do
     hdo = FactoryGirl.create :hackday_organization
     3.times.each { FactoryGirl.create(:hardware, hackday_organization: hdo) }

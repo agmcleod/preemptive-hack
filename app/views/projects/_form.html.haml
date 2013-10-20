@@ -13,7 +13,7 @@
     - if !hardwares.nil? && hardwares.any?
       %p Include Hardware:
       - hardwares.each do |hardware|
-        = f.check_box "hardware_ids", id: "project_hardware_ids_#{hardware.id}"
-        = f.label "hardware_ids_#{hardware.id}", hardware.name
+        = check_box_tag "project[hardware_ids][]", hardware.id, project.has_hardware_id?(hardware.id),id: "project_hardware_ids_#{hardware.id}"
+        = label_tag "project_hardware_ids_#{hardware.id}", hardware.name
     .field
       = f.submit 'Save', class: 'btn btn-primary'

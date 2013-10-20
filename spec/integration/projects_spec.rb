@@ -1,14 +1,13 @@
 require 'spec_helper'
 
-def goto_valid_hackday
-  @hackday_org = FactoryGirl.create :hackday_organization
-  @hackday = FactoryGirl.create :hackday, hackday_organization: @hackday_org
-  visit hackday_organization_hackday_path(@hackday_org, @hackday)
-end
-
 feature 'Project Creation' do
+  before do
+    @hackday_org = FactoryGirl.create :hackday_organization
+    @hackday = FactoryGirl.create :hackday, hackday_organization: @hackday_org
+    visit hackday_organization_hackday_path(@hackday_org, @hackday)
+  end
+
   scenario 'Valid project info' do
-    goto_valid_hackday
     click_link 'Add Project'
     fill_in 'Name', with: 'TestProject'
     fill_in 'Description', with: 'This is an impressive project involving different things'
@@ -17,7 +16,6 @@ feature 'Project Creation' do
   end
 
   scenario 'duplicate existing project' do
-    goto_valid_hackday
     hd = FactoryGirl.create :hackday, hackday_organization: @hackday_org
     project = FactoryGirl.create :project, hackday: hd
     click_link 'Add Project'
@@ -27,7 +25,6 @@ feature 'Project Creation' do
   end
 
   scenario 'select hardware' do
-    goto_valid_hackday
     hardware = FactoryGirl.create(:hardware, name: "Leap Motion")
     @hackday.hardwares << hardware
     @hackday.save
