@@ -11,7 +11,7 @@ describe Hardware do
       end
 
       it 'should return 3' do
-        Hardware.for_hackday_organization(@hackday_organization.id).size.should eq(3)
+        expect(Hardware.for_hackday_organization(@hackday_organization.id).size).to eq(3)
       end
     end
 
@@ -22,7 +22,7 @@ describe Hardware do
       end
 
       it 'should return 3' do
-        Hardware.for_hackday_organization(@hackday_organization.id).size.should eq(5)
+        expect(Hardware.for_hackday_organization(@hackday_organization.id).size).to eq(5)
       end
     end
   end
