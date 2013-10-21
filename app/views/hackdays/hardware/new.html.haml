@@ -7,7 +7,6 @@
       %ul
         - @hackday.errors.full_messages.each do |msg|
           %li= msg
-      
   - @hardwares.each do |hardware|
     .field
       = check_box_tag "hardware_ids[#{hardware.id}]", 1, @hackday.has_hardware?(hardware), id: "hardware_ids_#{hardware.id}"

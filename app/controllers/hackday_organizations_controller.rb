@@ -31,7 +31,7 @@ class HackdayOrganizationsController < ApplicationController
         format.html { redirect_to @hackday_organization, notice: 'Hackday organization was successfully created.' }
         format.json { render action: 'show', status: :created, location: @hackday_organization }
       else
-        format.html { render action: 'new' }
+        format.html { render 'new' }
         format.json { render json: @hackday_organization.errors, status: :unprocessable_entity }
       end
     end
@@ -45,7 +45,7 @@ class HackdayOrganizationsController < ApplicationController
         format.html { redirect_to @hackday_organization, notice: 'Hackday organization was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render 'edit' }
         format.json { render json: @hackday_organization.errors, status: :unprocessable_entity }
       end
     end

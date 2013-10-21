@@ -1,5 +1,5 @@
 .hackday_organization
   %h3= link_to hackday_organization.name, hackday_organization
-  %p 
+  %p
     Next hack day:
     = link_to hackday_as_date(hackday_organization.next_hackday), hackday_path(hackday_organization.next_hackday)

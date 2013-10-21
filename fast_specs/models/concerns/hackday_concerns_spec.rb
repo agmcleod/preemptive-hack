@@ -5,7 +5,7 @@ class Hackday < FromHash
   include HackdayConcerns
 
   attr_accessor :id
-  
+
   class << self
     def transaction
       yield
