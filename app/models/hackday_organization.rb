@@ -7,6 +7,11 @@ class HackdayOrganization < ActiveRecord::Base
 
   validates :name, presence: true
 
+  def create_test_user
+    users.build username: Faker::Internet.user_name, email: Faker::Internet.email
+    save
+  end
+
   def next_hackday
     hackdays.first
   end

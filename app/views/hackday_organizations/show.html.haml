@@ -13,7 +13,7 @@
   %h3 Members:
   - @hackday_organization.users.each do |user|
     %li= user.username
-  = button_to 'Add Test User', users_path(hackday_organization_id: @hackday_organization.id), class: 'btn btn-info'
+  = button_to 'Add Test User', hackday_organization_users_path(@hackday_organization), class: 'btn btn-info'
 = link_to 'Back to organizations', hackday_organizations_path
 
 .hardware

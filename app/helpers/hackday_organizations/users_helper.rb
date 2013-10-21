@@ -1,0 +1,2 @@
+module HackdayOrganizations::UsersHelper
+end

@@ -1,20 +1,6 @@
 class HackdayOrganizationsController < ApplicationController
   before_action :set_hackday_organization, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @hackday_organizations = HackdayOrganization.all
-  end
-
-  def show
-  end
-
-  def new
-    @hackday_organization = HackdayOrganization.new
-  end
-
-  def edit
-  end
-
   def create
     @hackday_organization = HackdayOrganization.new(hackday_organization_params)
 
@@ -23,6 +9,22 @@ class HackdayOrganizationsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def edit
+
+  end
+
+  def index
+    @hackday_organizations = HackdayOrganization.all
+  end
+
+  def new
+    @hackday_organization = HackdayOrganization.new
+  end
+
+  def show
+
   end
 
   def update
