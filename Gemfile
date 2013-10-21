@@ -33,6 +33,8 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'faker'
+  gem 'rails_best_practices'
+  gem 'brakeman'
 end
 
 group :test do

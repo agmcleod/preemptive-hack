@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131019223612) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20131021181745) do
 
   create_table "hackday_organizations", force: true do |t|
     t.string   "name"
@@ -31,6 +28,8 @@ ActiveRecord::Schema.define(version: 20131019223612) do
     t.datetime "updated_at"
   end
 
+  add_index "hackdays", ["hackday_organization_id"], name: "index_hackdays_on_hackday_organization_id", using: :btree
+
   create_table "hardwares", force: true do |t|
     t.string   "name"
     t.integer  "hackday_organization_id"
@@ -38,12 +37,17 @@ ActiveRecord::Schema.define(version: 20131019223612) do
     t.datetime "updated_at"
   end
 
+  add_index "hardwares", ["hackday_organization_id"], name: "index_hardwares_on_hackday_organization_id", using: :btree
+
   create_table "hardwares_hackdays", force: true do |t|
     t.integer  "hardware_id"
     t.integer  "hackday_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "hardwares_hackdays", ["hackday_id"], name: "index_hardwares_hackdays_on_hackday_id", using: :btree
+  add_index "hardwares_hackdays", ["hardware_id"], name: "index_hardwares_hackdays_on_hardware_id", using: :btree
 
   create_table "projects", force: true do |t|
     t.string   "name"
@@ -53,12 +57,17 @@ ActiveRecord::Schema.define(version: 20131019223612) do
     t.integer  "hackday_id"
   end
 
+  add_index "projects", ["hackday_id"], name: "index_projects_on_hackday_id", using: :btree
+
   create_table "projects_hardwares", force: true do |t|
     t.integer  "project_id"
     t.integer  "hardware_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "projects_hardwares", ["hardware_id"], name: "index_projects_hardwares_on_hardware_id", using: :btree
+  add_index "projects_hardwares", ["project_id"], name: "index_projects_hardwares_on_project_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email"
@@ -73,5 +82,8 @@ ActiveRecord::Schema.define(version: 20131019223612) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users_hackday_organizations", ["hackday_organization_id"], name: "index_users_hackday_organizations_on_hackday_organization_id", using: :btree
+  add_index "users_hackday_organizations", ["user_id"], name: "index_users_hackday_organizations_on_user_id", using: :btree
 
 end
