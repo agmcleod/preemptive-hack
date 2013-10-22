@@ -3,7 +3,7 @@ class HackdayOrganizationsController < ApplicationController
 
   def create
     @hackday_organization = current_user.owned_hackday_organizations.build(hackday_organization_params)
-    Rails.logger.debug ">>>>>>>>>> #{@hackday_organization.inspect}"
+    @hackday_organization.owners << current_user
     if @hackday_organization.save
       redirect_to @hackday_organization, notice: 'Hackday organization was successfully created.'
     else

@@ -16,7 +16,7 @@ feature 'Create hackday org' do
   scenario 'invalid name' do
     goto_new_page
     click_button 'Save'
-    expect(page).to have_content('1 error prohibited')
+    expect(page).to have_css('#error_explanation')
   end
 end
 
