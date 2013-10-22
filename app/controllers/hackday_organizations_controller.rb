@@ -2,8 +2,8 @@ class HackdayOrganizationsController < ApplicationController
   before_action :set_hackday_organization, only: [:show, :edit, :update, :destroy]
 
   def create
-    @hackday_organization = HackdayOrganization.new(hackday_organization_params)
-
+    @hackday_organization = current_user.owned_hackday_organizations.build(hackday_organization_params)
+    Rails.logger.debug ">>>>>>>>>> #{@hackday_organization.inspect}"
     if @hackday_organization.save
       redirect_to @hackday_organization, notice: 'Hackday organization was successfully created.'
     else

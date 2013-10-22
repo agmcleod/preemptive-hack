@@ -25,7 +25,7 @@ feature 'Project Creation' do
   end
 
   scenario 'select hardware' do
-    hardware = FactoryGirl.create(:hardware, name: "Leap Motion")
+    hardware = FactoryGirl.create :hardware, name: "Leap Motion"
     @hackday.hardwares << hardware
     @hackday.save
     click_link 'Add Project'
@@ -34,6 +34,10 @@ feature 'Project Creation' do
     check 'Leap Motion'
     click_button 'Save'
     expect(page).to have_content('Leap Motion')
+  end
+
+  scenario 'not an owner' do
+    pending
   end
 end
 
@@ -47,5 +51,9 @@ feature 'Edit Project' do
     fill_in 'Name', with: "Edited #{project.name}"
     click_button 'Save'
     expect(page).to have_content("Edited #{project.name}")
+  end
+
+  scenario 'not an owner' do
+    pending
   end
 end

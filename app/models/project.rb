@@ -9,8 +9,7 @@ class Project < ActiveRecord::Base
   class << self
     def create_from_project(id)
       old_project = Project.find id
-      project = Project.new
-      project.attributes = old_project.attributes
+      project = Project.new old_project.attributes
       project.id = nil
       Project.transaction do
         project.save!

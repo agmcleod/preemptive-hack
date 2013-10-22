@@ -20,6 +20,16 @@ feature 'Create hackday org' do
   end
 end
 
+feature 'edit hackday org' do
+  scenario 'owner edits with valid info' do
+    pending
+  end
+
+  scenario 'not an owner' do
+    pending
+  end
+end
+
 feature 'add test user' do
   scenario 'clicks button' do
     h = FactoryGirl.create(:hackday_organization)
@@ -47,5 +57,9 @@ feature 'Add hardware to organization' do
     click_link 'Add Hardware Item'
     fill_in 'Name', with: 'Raspberry Pi'
     click_button 'Add'
+  end
+
+  scenario 'not an owner' do
+    pending
   end
 end
