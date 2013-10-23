@@ -27,7 +27,7 @@ class Hardware < FromHash
 end
 
 class HardwaresHackdays < FromHash
-  attr_accessor :hardware_id, :id
+  attr_accessor :hardware_id
 
   class << self
     def where(*args)
@@ -44,7 +44,7 @@ describe HackdayConcerns do
   describe '#has_hardware?' do
     let(:hackday) { Hackday.new }
     it 'should have hardware with id 1' do
-      hackday.hardwares_hackdays.build(id: 1)
+      hackday.hardwares_hackdays.build(hardware_id: 1)
       expect(hackday.has_hardware?(Hardware.new(id: 1))).to be_true
     end
   end
