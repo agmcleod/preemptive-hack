@@ -1,5 +1,4 @@
 class HackdayOrganization < ActiveRecord::Base
-  include HackdayOrganizationConcerns
   has_many :hackdays, -> { order("start_date desc") }, dependent: :destroy
   has_many :users_hackday_organizations
   has_many :users, through: :users_hackday_organizations

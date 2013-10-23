@@ -18,14 +18,12 @@
       %li= user.username
   - if @hackday_organization.is_owner? current_user
     %p
-      %strong Edit members
+      %strong Add Members
     = form_tag hackday_organization_users_path(@hackday_organization) do
       .field
-        - @hackday_organization.users.each do |user|
-          = check_box_tag "user_ids[#{user.id}]", user.id, @hackday_organization.users.include?(user), id: "users_ids_#{user.id}"
-          = label_tag "users_ids_#{user.id}", user.username, class: 'inline'
+        = select_tag 'user_id', options_from_collection_for_select(User.available_users(@hackday_organization.id), 'id', 'username')
       .field
-        = submit_tag 'Save', class: 'btn'
+        = submit_tag 'Add Save', class: 'btn'
 
 .hardware
   %h3 Hardware:

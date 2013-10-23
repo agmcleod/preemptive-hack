@@ -52,23 +52,8 @@ feature 'edit hackday org' do
   end
 end
 
-feature 'add test user' do
-  scenario 'clicks button' do
-    h = FactoryGirl.create(:hackday_organization)
-    hd = FactoryGirl.create(:hackday, hackday_organization: h)
-    visit hackday_organizations_path
-    click_link h.name
-    click_button 'Add Test User'
-    expect(page).to have_content('Test user added')
-  end
-end
-
 feature 'add member to the organization' do
   scenario 'owner' do
-    pending
-  end
-
-  scenario 'owner and create new member' do
     pending
   end
 
