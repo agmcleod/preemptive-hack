@@ -22,11 +22,27 @@ end
 
 feature 'edit hackday org' do
   scenario 'owner edits with valid info' do
-    pending
+    hdo = FactoryGirl.create :hackday_organization
+    visit hackday_organization_path(hdo)
+    click_link 'Edit'
+    name = "A different hack org name" 
+    fill_in 'Name', with: name
+    click_button 'Save'
+    expect(page).to have_content(name)
   end
 
-  scenario 'not an owner' do
-    pending
+  scenario 'not an owner, should not see link' do
+    hdo = FactoryGirl.create :hackday_organization
+    hdo.owners.destroy_all
+    visit hackday_organization_path(hdo)
+    expect(page).to_not have_content('Edit')
+  end
+
+  scenario 'not an owner, should get redirected' do
+    hdo = FactoryGirl.create :hackday_organization
+    hdo.owners.destroy_all
+    visit edit_hackday_organization_path(hdo)
+    expect(current_path).to eq(hackday_organization_path(hdo))
   end
 end
 
@@ -38,6 +54,20 @@ feature 'add test user' do
     click_link h.name
     click_button 'Add Test User'
     expect(page).to have_content('Test user added')
+  end
+end
+
+feature 'add member to the organization' do
+  scenario 'owner' do
+    pending
+  end
+
+  scenario 'owner and create new member' do
+    pending
+  end
+
+  scenario 'not an owner' do
+    pending
   end
 end
 
@@ -59,7 +89,17 @@ feature 'Add hardware to organization' do
     click_button 'Add'
   end
 
-  scenario 'not an owner' do
-    pending
+  scenario 'not an owner, should get redirected' do
+    hdo = FactoryGirl.create :hackday_organization
+    hdo.hackday_organizations_owners.destroy_all
+    visit new_hackday_organization_hardware_path(hdo)
+    expect(current_path).to eq(hackday_organization_path(hdo))
+  end
+
+  scenario 'not an owner, should not see link' do
+    hdo = FactoryGirl.create :hackday_organization
+    hdo.hackday_organizations_owners.destroy_all
+    visit hackday_organization_path(hdo)
+    expect(page).to_not have_content('Add Hardware Item')
   end
 end

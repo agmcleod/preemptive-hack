@@ -15,6 +15,10 @@ class HackdayOrganization < ActiveRecord::Base
     save
   end
 
+  def is_owner?(user)
+    owners.include? user
+  end
+
   def next_hackday
     hackdays.first
   end

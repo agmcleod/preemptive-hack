@@ -1,5 +1,5 @@
 class HackdayOrganizationsController < ApplicationController
-  before_action :set_hackday_organization, only: [:show, :edit, :update, :destroy]
+  before_action :set_hackday_organization, only: [:show, :edit, :update]
 
   def create
     @hackday_organization = current_user.owned_hackday_organizations.build(hackday_organization_params)
@@ -12,7 +12,7 @@ class HackdayOrganizationsController < ApplicationController
   end
 
   def edit
-
+    check_ownership
   end
 
   def index
@@ -28,6 +28,7 @@ class HackdayOrganizationsController < ApplicationController
   end
 
   def update
+    check_ownership
     if @hackday_organization.update(hackday_organization_params)
       redirect_to @hackday_organization, notice: 'Hackday organization was successfully updated.'
     else
@@ -42,13 +43,15 @@ class HackdayOrganizationsController < ApplicationController
   end
 
 private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_hackday_organization
-    @hackday_organization = HackdayOrganization.find(params[:id])
+  def check_ownership
+    redirect_to @hackday_organization unless @hackday_organization.is_owner? current_user
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def hackday_organization_params
     params.require(:hackday_organization).permit(:name)
+  end
+
+  def set_hackday_organization
+    @hackday_organization = HackdayOrganization.where(id: params[:id]).includes(:owners).first
   end
 end
