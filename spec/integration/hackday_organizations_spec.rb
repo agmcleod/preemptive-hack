@@ -54,10 +54,18 @@ end
 
 feature 'add member to the organization' do
   scenario 'owner' do
-    pending
+    hdo = FactoryGirl.create :hackday_organization
+    u = FactoryGirl.create :user
+    visit hackday_organization_path(hdo)
+    select u.username, from: 'user_id'
+    click_button 'Add Member'
+    expect(page).to have_content('User has been added to the organization')
   end
 
   scenario 'not an owner' do
-    pending
+    hdo = FactoryGirl.create :hackday_organization
+    hdo.hackday_organizations_owners.destroy_all
+    visit hackday_organization_path(hdo)
+    expect(page).to_not have_content('Add Member')
   end
 end

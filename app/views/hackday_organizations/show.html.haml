@@ -23,7 +23,7 @@
       .field
         = select_tag 'user_id', options_from_collection_for_select(User.available_users(@hackday_organization.id), 'id', 'username')
       .field
-        = submit_tag 'Add Save', class: 'btn'
+        = submit_tag 'Add Member', class: 'btn'
 
 .hardware
   %h3 Hardware:
