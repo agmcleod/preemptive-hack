@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131022135854) do
+ActiveRecord::Schema.define(version: 20131023144733) do
 
   create_table "hackday_organizations", force: true do |t|
     t.string   "name"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20131022135854) do
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   add_index "hackdays", ["hackday_organization_id"], name: "index_hackdays_on_hackday_organization_id", using: :btree

@@ -44,24 +44,6 @@ class AssociationSet
   end
 end
 
-class Hardware < FromHash
-  attr_accessor :id
-end
-
-class HardwaresHackdays < FromHash
-  attr_accessor :hardware_id
-
-  class << self
-    def where(*args)
-      self
-    end
-
-    def destroy_all(*args)
-      self
-    end
-  end
-end
-
 RSpec.configure do |config|
   config.mock_with :rspec
   config.treat_symbols_as_metadata_keys_with_true_values = true

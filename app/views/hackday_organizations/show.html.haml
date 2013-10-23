@@ -3,23 +3,34 @@
 - if @hackday_organization.is_owner? current_user
   = link_to 'Edit', edit_hackday_organization_path(@hackday_organization)
 .hackdays
-  %p= link_to 'Create new Hackday', new_hackday_organization_hackday_path(@hackday_organization)
+  - if @hackday_organization.is_owner? current_user
+    %p= link_to 'Create New Hackday', new_hackday_organization_hackday_path(@hackday_organization)
 
   %h3 Upcoming Hackdays:
   %ul
     - @hackday_organization.hackdays.each do |hackday|
-      %li= link_to hackday.start_date_formatted, [@hackday_organization, hackday]
+      %li= link_to hackday.name, [@hackday_organization, hackday]
 
 .members
   %h3 Members:
-  - @hackday_organization.users.each do |user|
-    %li= user.username
-  = button_to 'Add Test User', hackday_organization_users_path(@hackday_organization), class: 'btn btn-info'
-= link_to 'Back to organizations', hackday_organizations_path
+  %ul
+    - @hackday_organization.members.each do |user|
+      %li= user.username
+  - if @hackday_organization.is_owner? current_user
+    %p
+      %strong Edit members
+    = form_tag hackday_organization_users_path(@hackday_organization) do
+      .field
+        - @hackday_organization.users.each do |user|
+          = check_box_tag "user_ids[#{user.id}]", user.id, @hackday_organization.users.include?(user), id: "users_ids_#{user.id}"
+          = label_tag "users_ids_#{user.id}", user.username, class: 'inline'
+      .field
+        = submit_tag 'Save', class: 'btn'
 
-- if @hackday_organization.is_owner? current_user
-  .hardware
-    %h3 Hardware:
+.hardware
+  %h3 Hardware:
+  - if @hackday_organization.is_member? current_user
     = link_to 'Add Hardware Item', new_hackday_organization_hardware_path(@hackday_organization)
-    - Hardware.for_hackday_organization(@hackday_organization).each do |hardware|
-      %li= hardware.name
+  - Hardware.for_hackday_organization(@hackday_organization).each do |hardware|
+    %li= hardware.name
+= link_to 'Back to organizations', hackday_organizations_path

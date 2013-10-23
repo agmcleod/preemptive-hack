@@ -22,14 +22,30 @@ class Hackday < FromHash
   end
 end
 
-describe HackdayConcerns do
-  describe '#has_hardware?' do
-    before do
-      @hackday = Hackday.new
+class Hardware < FromHash
+  attr_accessor :id
+end
+
+class HardwaresHackdays < FromHash
+  attr_accessor :hardware_id, :id
+
+  class << self
+    def where(*args)
+      self
     end
 
+    def destroy_all(*args)
+      self
+    end
+  end
+end
+
+describe HackdayConcerns do
+  describe '#has_hardware?' do
+    let(:hackday) { Hackday.new }
     it 'should have hardware with id 1' do
-      @hackday.has_hardware? Hardware.new(id: 1)
+      hackday.hardwares_hackdays.build(id: 1)
+      expect(hackday.has_hardware?(Hardware.new(id: 1))).to be_true
     end
   end
 
@@ -40,12 +56,12 @@ describe HackdayConcerns do
     end
 
     it 'should have id 1' do
-      @hackday.has_hardware_id?(1).should be_true
+      expect(@hackday.has_hardware_id?(1)).to be_true
     end
 
 
     it 'should not have id 5' do
-      @hackday.has_hardware_id?(5).should be_false
+      expect(@hackday.has_hardware_id?(5)).to be_false
     end
   end
 
@@ -62,7 +78,7 @@ describe HackdayConcerns do
           3 => '1'
         })
 
-        @hackday.hardwares_hackdays.size.should eq(3)
+        expect(@hackday.hardwares_hackdays.size).to eq(3)
       end
 
       it 'hardware hackdays should receive a destroy' do
@@ -83,7 +99,7 @@ describe HackdayConcerns do
           2 => '1',
           3 => '1'
         })
-        @hackday.hardwares_hackdays.size.should eq(3)
+        expect(@hackday.hardwares_hackdays.size).to eq(3)
       end
     end
   end

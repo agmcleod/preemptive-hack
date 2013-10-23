@@ -1,4 +1,4 @@
-%h2 Upcoming Hackday for #{@hackday_organization.name}
+%h2= @hackday.name
 
 %p Starts at: #{@hackday.start_date_formatted}
 
@@ -6,12 +6,14 @@
 
 .projects
   - @hackday.projects.each do |project|
-    = render project, hackday_id: @hackday.id
-  = link_to 'Add Project', new_project_path(hackday_id: @hackday.id)
+    = render project, hackday: @hackday
+  - if @hackday.is_owner? current_user
+    = link_to 'Add Project', new_project_path(hackday_id: @hackday.id)
 
 %h3 Hardware
 
 .hardwares
   - @hackday.hardwares.each do |hardware|
     = render hardware
-  = link_to 'Edit Available Hardware', new_hackday_hardware_path(@hackday)
+  - if @hackday.is_owner? current_user
+    = link_to 'Edit Available Hardware', new_hackday_hardware_path(@hackday)

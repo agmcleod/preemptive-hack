@@ -5,9 +5,19 @@ class Hackday < ActiveRecord::Base
   has_many :hardwares, through: :hardwares_hackdays
   include HackdayConcerns
 
+  validates :name, presence: true
   validates :start_date, presence: true
   validates :hackday_organization, presence: true
   validate :start_before_end
+
+  def is_member?(user)
+    hackday_organization.is_member? user
+  end
+
+  def is_owner?(owner)
+    return false if hackday_organization.nil?
+    hackday_organization.is_owner? owner
+  end
 
 private
   def start_before_end

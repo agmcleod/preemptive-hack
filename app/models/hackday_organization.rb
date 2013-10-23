@@ -1,4 +1,5 @@
 class HackdayOrganization < ActiveRecord::Base
+  include HackdayOrganizationConcerns
   has_many :hackdays, -> { order("start_date desc") }, dependent: :destroy
   has_many :users_hackday_organizations
   has_many :users, through: :users_hackday_organizations
@@ -14,9 +15,17 @@ class HackdayOrganization < ActiveRecord::Base
     users.build username: Faker::Internet.user_name, email: Faker::Internet.email
     save
   end
+  
+  def is_member?(user)
+    members.include? user
+  end
 
   def is_owner?(user)
     owners.include? user
+  end
+  
+  def members
+    owners + users
   end
 
   def next_hackday
