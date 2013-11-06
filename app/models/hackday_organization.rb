@@ -14,7 +14,7 @@ class HackdayOrganization < ActiveRecord::Base
     users.build username: Faker::Internet.user_name, email: Faker::Internet.email
     save
   end
-  
+
   def is_member?(user)
     members.include? user
   end
@@ -22,7 +22,7 @@ class HackdayOrganization < ActiveRecord::Base
   def is_owner?(user)
     owners.include? user
   end
-  
+
   def members
     owners + users
   end

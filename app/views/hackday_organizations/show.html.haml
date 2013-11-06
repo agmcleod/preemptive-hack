@@ -15,13 +15,16 @@
   %h3 Members:
   %ul
     - @hackday_organization.members.each do |user|
-      %li= user.username
-  - if @hackday_organization.is_owner? current_user
+      %li{ id: "member_#{user.id}" }
+        = user.username
+        - if @hackday_organization.is_owner? current_user
+          = link_to 'X', hackday_organization_user_path(@hackday_organization, user), method: :delete, id: "remove_member_#{user.id}"
+  - if @hackday_organization.is_owner?(current_user) && available_users_for(@hackday_organization).any?
     %p
       %strong Add Members
     = form_tag hackday_organization_users_path(@hackday_organization) do
       .field
-        = select_tag 'user_id', options_from_collection_for_select(User.available_users(@hackday_organization.id), 'id', 'username')
+        = select_tag 'user_id', options_from_collection_for_select(available_users_for(@hackday_organization), 'id', 'username')
       .field
         = submit_tag 'Add Member', class: 'btn'
 

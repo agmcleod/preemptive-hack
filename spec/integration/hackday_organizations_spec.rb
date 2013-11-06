@@ -31,7 +31,7 @@ feature 'edit hackday org' do
     hdo = FactoryGirl.create :hackday_organization
     visit hackday_organization_path(hdo)
     click_link 'Edit'
-    name = "A different hack org name" 
+    name = "A different hack org name"
     fill_in 'Name', with: name
     click_button 'Save'
     expect(page).to have_content(name)
@@ -67,5 +67,17 @@ feature 'add member to the organization' do
     hdo.hackday_organizations_owners.destroy_all
     visit hackday_organization_path(hdo)
     expect(page).to_not have_content('Add Member')
+  end
+end
+
+feature 'remove member from organization' do
+  scenario 'owner' do
+    hdo = FactoryGirl.create :hackday_organization
+    u = FactoryGirl.create :user
+    hdo.users << u
+    hdo.save
+    visit hackday_organization_path(hdo)
+    click_link "remove_member_#{u.id}"
+    expect(page).to_not have_css("#member_#{u.id}")
   end
 end
