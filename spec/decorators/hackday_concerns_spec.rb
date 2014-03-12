@@ -1,44 +1,4 @@
-require 'fast_spec_helper'
-app_require 'app/models/concerns/hackday_concerns'
-
-class Hackday < FromHash
-  include HackdayConcerns
-
-  attr_accessor :id
-
-  class << self
-    def transaction
-      yield
-    end
-  end
-
-  def initialize(hash = {})
-    super(hash)
-    @set = AssociationSet.new [], HardwaresHackdays
-  end
-
-  def hardwares_hackdays
-    @set
-  end
-end
-
-class Hardware < FromHash
-  attr_accessor :id
-end
-
-class HardwaresHackdays < FromHash
-  attr_accessor :hardware_id
-
-  class << self
-    def where(*args)
-      self
-    end
-
-    def destroy_all(*args)
-      self
-    end
-  end
-end
+require 'decorators_spec_helper'
 
 describe HackdayConcerns do
   describe '#has_hardware?' do

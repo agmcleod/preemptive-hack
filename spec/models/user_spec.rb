@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../models_spec_helper'
 
 describe User do
   describe '::guest_account' do

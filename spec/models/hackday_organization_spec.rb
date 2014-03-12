@@ -1,9 +1,10 @@
-require 'spec_helper'
+require_relative '../models_spec_helper'
 
 describe HackdayOrganization do
   describe '::create_test_user' do
     it 'should have a user object' do
-      org = FactoryGirl.build :hackday_organization
+      org = default_hackday_org
+      org.owners << User.guest_account
       org.create_test_user
       expect(org.users.size).to eq(1)
     end

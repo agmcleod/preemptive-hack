@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../models_spec_helper'
 
 describe Project do
   describe '::create_from_project' do
