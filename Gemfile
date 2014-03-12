@@ -35,14 +35,11 @@ group :development, :test do
   gem 'faker'
   gem 'rails_best_practices'
   gem 'brakeman'
+  gem 'rails_spec_harness'
 end
 
 group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'database_cleaner'
-end
-
-group :production do
-  gem 'mysql2'
 end
