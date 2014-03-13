@@ -50,11 +50,11 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.before(:each) do
-    DatabaseCleaner.start
+  config.after(:each) do |example_group|
+    DatabaseCleaner.clean
   end
 
-  config.after(:each) do
-    DatabaseCleaner.clean
+  config.before(:each) do |example_group|
+    DatabaseCleaner.start
   end
 end

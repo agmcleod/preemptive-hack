@@ -3,7 +3,7 @@ class Hackday < ActiveRecord::Base
   has_many :projects, dependent: :destroy
   has_many :hardwares_hackdays, class_name: HardwaresHackdays, dependent: :destroy
   has_many :hardwares, through: :hardwares_hackdays
-  include HackdayConcerns
+  include HackdayDecorator
 
   validates :name, presence: true
   validates :start_date, presence: true
