@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Hardware do
   describe '::for_hackday_organization' do
     before do
-      @hackday_organization = FactoryGirl.create :hackday_organization
+      @hackday_organization = default_hackday_org
     end
     context 'none for org' do
       before do
