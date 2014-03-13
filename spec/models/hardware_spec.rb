@@ -1,4 +1,4 @@
-require_relative '../models_spec_helper'
+require 'spec_helper'
 
 describe Hardware do
   describe '::for_hackday_organization' do

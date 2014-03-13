@@ -1,4 +1,4 @@
-require 'features_spec_helper'
+require 'spec_helper'
 
 feature 'listing hackday org hardware' do
   scenario 'hardware created' do

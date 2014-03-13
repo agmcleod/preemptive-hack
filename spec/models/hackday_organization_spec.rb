@@ -1,4 +1,4 @@
-require_relative '../models_spec_helper'
+require 'spec_helper'
 
 describe HackdayOrganization do
   describe '::create_test_user' do

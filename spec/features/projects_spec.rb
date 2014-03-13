@@ -1,4 +1,4 @@
-require 'features_spec_helper'
+require 'spec_helper'
 
 def hackday(org)
   FactoryGirl.create :hackday, hackday_organization: org

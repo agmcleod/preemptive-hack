@@ -1,4 +1,4 @@
-require 'decorators_spec_helper'
+require 'spec_helper'
 
 describe HackdayConcerns do
   describe '#has_hardware?' do
