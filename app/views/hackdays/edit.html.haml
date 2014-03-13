@@ -1,2 +1,2 @@
-%h1 Editing Hackday Organization
-%p Find me in app/views/hackdays/edit.html.haml
+%h1 Edit Hackday: #{@hackday.name}
+= render 'form', hackday_organization: @hackday_organization, hackday: @hackday

@@ -15,12 +15,18 @@ module HackdayConcerns
     ids_to_keep = []
     Hackday.transaction do
       ids_hash.each do |id, checked|
+        id = id.to_i
         if checked.to_i == 1
           ids_to_keep << id
-          hardwares_hackdays.create(hardware_id: id) unless has_hardware_id?(id)
+          hardwares_hackdays.build(hardware_id: id) unless has_hardware_id?(id)
         end
       end
-      HardwaresHackdays.where('hackday_id = ? AND hardware_id NOT IN (?)', self.id, ids_to_keep).destroy_all
+      hardwares_hackdays.each do |hd|
+        if !ids_to_keep.include?(hd.hardware_id)
+          hardwares_hackdays.destroy(hd)
+        end
+      end
+      save!
     end
   end
 end

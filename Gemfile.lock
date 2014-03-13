@@ -253,6 +253,7 @@ DEPENDENCIES
   jbuilder (~> 1.0.1)
   jquery-rails
   pg
+  pry
   rails (~> 4.0.0)
   rails_best_practices
   rspec
