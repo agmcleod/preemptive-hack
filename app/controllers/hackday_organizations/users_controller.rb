@@ -2,10 +2,10 @@ class HackdayOrganizations::UsersController < ApplicationController
   def create
     hackday_organization = HackdayOrganization.find params[:hackday_organization_id]
     check_ownership(hackday_organization)
-    if hackday_organization.users_hackday_organizations.build(user_id: params[:user_id])
+    if hackday_organization.users_hackday_organizations.create(user_id: params[:user_id])
       redirect_to hackday_organization, notice: 'User has been added to the organization'
     else
-      redirect_to hackday_organization, error: "Test user count not be created"
+      redirect_to hackday_organization, error: "User could not be added"
     end
   end
 

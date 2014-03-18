@@ -59,7 +59,7 @@ feature 'add member to the organization' do
     visit hackday_organization_path(hdo)
     select u.username, from: 'user_id'
     click_button 'Add Member'
-    expect(page).to have_content('User has been added to the organization')
+    expect(HackdayOrganization.last.users.count).to eq(1)
   end
 
   scenario 'not an owner' do
