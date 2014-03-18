@@ -41,4 +41,24 @@ describe ProjectsController do
       expect(response).to redirect_to(hackday_url(@project.hackday))
     end
   end
+
+  describe 'PUT update' do
+    it 'if not owner of hackday org, should redirect to the hackday' do
+      controller.stub current_user: @other_user
+      put :update, id: @project.id, hackday_id: @project.hackday_id, project: { name: "New name" }
+      expect(response).to redirect_to(hackday_url(@project.hackday))
+    end
+
+    it 'if owner of hackday, but project does not belong, should redirect to hackday' do
+      project = FactoryGirl.create :project
+      put :update, id: project.id, hackday_id: @project.hackday_id, project: { name: "New name" }
+      expect(response).to redirect_to(hackday_url(@project.hackday))
+    end
+
+    it 'if owner of hackday, but project does not belong, project should not get updated' do
+      project = FactoryGirl.create :project
+      put :update, id: project.id, hackday_id: @project.hackday_id, project: { name: "New name" }
+      expect(Project.find_by_id(project.id).name).to_not eq('New name')
+    end
+  end
 end
