@@ -1,4 +1,6 @@
 = form_for [hackday_organization, hardware] do |f|
+  - if hardware.errors.any?
+    = errors_out hardware
   .field
     = f.label :name
     = f.text_field :name

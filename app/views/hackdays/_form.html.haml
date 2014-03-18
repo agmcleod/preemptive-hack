@@ -1,10 +1,6 @@
 = form_for [hackday_organization, hackday] do |f|
   - if hackday.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(hackday.errors.count, "error")} prohibited this hackday from being saved:"
-      %ul
-        - hackday.errors.full_messages.each do |msg|
-          %li= msg
+    = errors_out hackday
 
   .field
     = f.label :name, 'Name'
