@@ -1,0 +1,14 @@
+!!!5
+%html
+  %head
+    %title Pre-Emptive Hack
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  %body
+    = nav_bar brand: "Pre-emptive Hack", responsive: true do
+      = menu_group pull: :right do
+        - if current_user
+          = menu_item 'Logout', logout_path, method: :delete
+    = bootstrap_flash
+    = yield
