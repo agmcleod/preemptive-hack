@@ -7,6 +7,9 @@ def visit_hackday_org
 end
 
 feature 'Feature: Add hardware to hackday' do
+  background do
+    login_for_feature
+  end
   scenario 'multiple selected' do
     hackday_org = FactoryGirl.create :hackday_organization
     hackday = FactoryGirl.create :hackday, hackday_organization: hackday_org
@@ -36,6 +39,9 @@ feature 'Feature: Add hardware to hackday' do
 end
 
 feature 'Feature: add a hackday' do
+  background do
+    login_for_feature
+  end
   scenario 'valid form data' do
     hackday_org = FactoryGirl.create :hackday_organization
     visit hackday_organizations_path

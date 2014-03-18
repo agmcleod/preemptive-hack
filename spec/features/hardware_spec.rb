@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 feature 'Feature: listing hackday org hardware' do
+  background do
+    login_for_feature
+  end
   scenario 'hardware created' do
     hdo = FactoryGirl.create :hackday_organization
     3.times.each { FactoryGirl.create(:hardware, hackday_organization: hdo) }
@@ -10,6 +13,9 @@ feature 'Feature: listing hackday org hardware' do
 end
 
 feature 'Feature: Add hardware to organization' do
+  background do
+    login_for_feature
+  end
   scenario 'valid information' do
     hdo = FactoryGirl.create :hackday_organization
     visit hackday_organization_path(hdo)
@@ -35,7 +41,7 @@ feature 'Feature: Add hardware to organization' do
   scenario 'is a member, should see link' do
     hdo = FactoryGirl.create :hackday_organization
     hdo.hackday_organizations_owners.destroy_all
-    hdo.users << User.guest_account
+    hdo.users << User.last
     hdo.save
     visit hackday_organization_path(hdo)
     expect(page).to have_content('Add Hardware Item')

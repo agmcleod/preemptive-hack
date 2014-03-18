@@ -11,7 +11,7 @@ class HackdayOrganization < ActiveRecord::Base
   validate :at_least_one_owner
 
   def create_test_user
-    users.build username: Faker::Internet.user_name, email: Faker::Internet.email
+    users.build username: Faker::Internet.user_name, email: Faker::Internet.email, test_user: true
     save
   end
 

@@ -1,12 +1,10 @@
 require 'spec_helper'
 
-def visit_hackday_org
-  hackday_org = FactoryGirl.create :hackday_organization
-  visit hackday_organizations_path
-  click_link hackday_org.name
-end
-
 feature 'Feature: Create hackday org' do
+  background do
+    login_for_feature
+  end
+
   def goto_new_page
     visit root_path
     click_link 'Hackday Organizations'
@@ -27,6 +25,10 @@ feature 'Feature: Create hackday org' do
 end
 
 feature 'Feature: edit hackday org' do
+  background do
+    login_for_feature
+  end
+
   scenario 'owner edits with valid info' do
     hdo = FactoryGirl.create :hackday_organization
     visit hackday_organization_path(hdo)
@@ -53,6 +55,10 @@ feature 'Feature: edit hackday org' do
 end
 
 feature 'Feature: add member to the organization' do
+  background do
+    login_for_feature
+  end
+
   scenario 'owner' do
     hdo = FactoryGirl.create :hackday_organization
     u = FactoryGirl.create :user
@@ -72,6 +78,7 @@ end
 
 feature 'Feature: remove member from organization' do
   scenario 'owner' do
+    login_for_feature
     hdo = FactoryGirl.create :hackday_organization
     u = FactoryGirl.create :user
     hdo.users << u

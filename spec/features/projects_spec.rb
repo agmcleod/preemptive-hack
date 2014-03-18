@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 feature 'Feature: Project Creation' do
-  before do
+  background do
+    login_for_feature
     @hackday_org = FactoryGirl.create :hackday_organization
     @hackday = FactoryGirl.create :hackday, hackday_organization: @hackday_org
     visit hackday_organization_hackday_path(@hackday_org, @hackday)
@@ -44,7 +45,8 @@ feature 'Feature: Project Creation' do
 end
 
 feature 'Feature: Edit Project' do
-  before do
+  background do
+    login_for_feature
     @hackday_org = FactoryGirl.create :hackday_organization
     @hackday = FactoryGirl.create :hackday, hackday_organization: @hackday_org
   end
@@ -67,6 +69,7 @@ end
 
 feature 'Feature: Remove project' do
   background do
+    login_for_feature
     @hackday_org = FactoryGirl.create :hackday_organization
     @hackday = FactoryGirl.create :hackday, hackday_organization: @hackday_org
   end

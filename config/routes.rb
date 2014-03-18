@@ -1,5 +1,11 @@
 Preemptivehack::Application.routes.draw do
   root to: 'dashboard#index'
+
+  get 'login' => 'session#new', as: 'login'
+  post 'login' => 'session#create', as: 'authenticate'
+  delete 'logout' => 'session#destroy', as: 'logout'
+  get 'logout' => 'session#destroy'
+
   resources :hackday_organizations, except: :destroy do
     resources :hackdays, except: [:destroy, :index]
     resources :hardwares, only: [:create, :new]

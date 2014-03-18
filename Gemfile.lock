@@ -28,6 +28,7 @@ GEM
     arel (4.0.2)
     atomic (1.1.16)
     awesome_print (1.2.0)
+    bcrypt (3.1.7)
     brakeman (2.4.1)
       erubis (~> 2.6)
       fastercsv (~> 1.5)
@@ -224,6 +225,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt
   brakeman
   capistrano (~> 2.15)
   capybara
