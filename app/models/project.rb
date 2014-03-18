@@ -5,25 +5,24 @@ class Project < ActiveRecord::Base
   has_many :hardwares, through: :projects_hardware
   include ProjectDecorator
   validates :name, presence: true
-  validates :description, presence: true
 
   class << self
-    def create_from_project(id)
+    def create_from_project(id, hackday_id)
       old_project = ProjectDecorator.find_or_return id
-      project = Project.new old_project.attributes
+      project = Project.new old_project.attributes.merge(hackday_id: hackday_id)
       project.id = nil
       Project.transaction do
         old_project.hardwares.each do |hardware|
           project.hardwares << hardware
         end
-        project.save
+        project.save!
       end
       project
     end
 
     def create_from_project_or_new(existing_project_id, project_params)
       if existing_project_id.present?
-        create_from_project existing_project_id.to_i
+        create_from_project existing_project_id.to_i, project_params[:hackday_id]
       else
         Project.new project_params
       end

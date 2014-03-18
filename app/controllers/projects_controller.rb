@@ -1,12 +1,12 @@
 class ProjectsController < ApplicationController
   def create
-    hackday = load_hackday
+    @hackday = load_hackday
     @project = Project.create_from_project_or_new(params[:existing_project_id], project_params)
     if @project.save
-      redirect_to hackday_url(@project.hackday_id), notice: "Project successfully added"
+      redirect_to hackday_url(@hackday.id), notice: "Project successfully added"
     else
-      @projects = load_projects hackday
-      @hardwares = hackday.hardwares
+      @projects = load_projects @hackday
+      @hardwares = @hackday.hardwares
       render :new
     end
   end
@@ -37,14 +37,14 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    hackday = load_hackday
-    @project = load_project_by_hackday hackday
-    if is_not_owner?(hackday) || @project.nil?
-      redirect_to hackday
+    @hackday = load_hackday
+    @project = load_project_by_hackday @hackday
+    if is_not_owner?(@hackday) || @project.nil?
+      redirect_to @hackday
     elsif @project.update_attributes(project_params)
-      redirect_to hackday_url(@project.hackday_id), notice: "Project successfully updated"
+      redirect_to hackday_url(@hackday.id), notice: "Project successfully updated"
     else
-      @hardwares = hackday.hardwares
+      @hardwares = @hackday.hardwares
       render :edit
     end
   end

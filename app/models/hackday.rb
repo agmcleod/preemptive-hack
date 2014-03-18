@@ -10,15 +10,6 @@ class Hackday < ActiveRecord::Base
   validates :hackday_organization, presence: true
   validate :start_before_end
 
-  def is_member?(user)
-    hackday_organization.is_member? user
-  end
-
-  def is_owner?(owner)
-    return false if hackday_organization.nil?
-    hackday_organization.is_owner? owner
-  end
-
 private
   def start_before_end
     if end_date && start_date >= end_date

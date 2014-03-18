@@ -4,14 +4,13 @@
 
 %h3 Projects:
 
+- current_user_is_owner = @hackday.is_owner? current_user
+- if current_user_is_owner
+  = link_to 'Add Project', new_hackday_project_path(@hackday.id)
+
 .projects
-  - current_user_is_owner = @hackday.is_owner? current_user
   - @hackday.projects.each do |project|
-    = render project, hackday: @hackday
-    - if current_user_is_owner
-      = link_to 'Delete Project', [@hackday, project], method: :delete, data: { confirm: "Are you sure?" }
-  - if current_user_is_owner
-    = link_to 'Add Project', new_hackday_project_path(@hackday.id)
+    = render project, hackday: @hackday, show_delete: true, current_user_is_owner: current_user_is_owner
 
 %h3 Hardware
 

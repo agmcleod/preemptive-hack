@@ -10,3 +10,5 @@
     %ul
       - project.hardwares.each do |hardware|
         %li= hardware.name
+  - if show_delete && current_user_is_owner
+    = link_to 'Delete Project', [@hackday, project], method: :delete, data: { confirm: "Are you sure?" }

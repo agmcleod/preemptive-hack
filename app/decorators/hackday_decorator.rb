@@ -7,6 +7,15 @@ module HackdayDecorator
     hardwares_hackdays.collect(&:hardware_id).include?(id)
   end
 
+  def is_member?(user)
+    hackday_organization.is_member? user
+  end
+
+  def is_owner?(owner)
+    return false if hackday_organization.nil?
+    hackday_organization.is_owner? owner
+  end
+
   def start_date_formatted
     start_date.to_formatted_s(:db)
   end

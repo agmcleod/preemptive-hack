@@ -52,6 +52,6 @@ private
   end
 
   def set_hackday_organization
-    @hackday_organization = HackdayOrganization.where(id: params[:id]).includes(:owners).first
+    @hackday_organization = HackdayOrganization.includes(:users).includes(:hardwares).includes(:owners).where(id: params[:id]).includes(:owners).first
   end
 end

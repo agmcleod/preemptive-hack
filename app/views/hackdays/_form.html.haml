@@ -1,10 +1,12 @@
 = form_for [hackday_organization, hackday] do |f|
   - if hackday.errors.any?
     = errors_out hackday
-
   .field
     = f.label :name, 'Name'
     = f.text_field :name
+  .field
+    = f.label :location
+    = f.text_field :location
   .field
     = f.label :start_date, 'Start Date'
     = f.text_field :start_date, type: 'datetime'
