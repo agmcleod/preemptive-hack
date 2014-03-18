@@ -18,7 +18,7 @@
       %li{ id: "member_#{user.id}" }
         = user.username
         - if @hackday_organization.is_owner? current_user
-          = link_to 'X', hackday_organization_user_path(@hackday_organization, user), method: :delete, id: "remove_member_#{user.id}"
+          = link_to 'X', hackday_organization_user_path(@hackday_organization, user), method: :delete, id: "remove_member_#{user.id}", data: { confirm: "Are you sure?" }
   - if @hackday_organization.is_owner?(current_user) && available_users_for(@hackday_organization).any?
     %p
       %strong Add Members
