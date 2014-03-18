@@ -1,4 +1,4 @@
 %h1 Editing Project
 
-= form_for @project do |f|
+= form_for [@hackday, @project] do |f|
   = render 'form', project: @project, hardwares: @hardwares, f: f

@@ -1,13 +1,9 @@
 require 'spec_helper'
 
-def hackday(org)
-  FactoryGirl.create :hackday, hackday_organization: org
-end
-
-feature 'Project Creation' do
+feature 'Feature: Project Creation' do
   before do
     @hackday_org = FactoryGirl.create :hackday_organization
-    @hackday = hackday @hackday_org
+    @hackday = FactoryGirl.create :hackday, hackday_organization: @hackday_org
     visit hackday_organization_hackday_path(@hackday_org, @hackday)
   end
 
@@ -47,10 +43,10 @@ feature 'Project Creation' do
   end
 end
 
-feature 'Edit Project' do
+feature 'Feature: Edit Project' do
   before do
     @hackday_org = FactoryGirl.create :hackday_organization
-    @hackday = hackday @hackday_org
+    @hackday = FactoryGirl.create :hackday, hackday_organization: @hackday_org
   end
   scenario 'Valid info' do
     project = FactoryGirl.create :project, hackday: @hackday
@@ -66,5 +62,30 @@ feature 'Edit Project' do
     project = FactoryGirl.create :project, hackday: @hackday
     visit hackday_path(@hackday)
     expect(page).to_not have_css("edit_project_#{project.id}_link")
+  end
+end
+
+feature 'Feature: Remove project' do
+  background do
+    @hackday_org = FactoryGirl.create :hackday_organization
+    @hackday = FactoryGirl.create :hackday, hackday_organization: @hackday_org
+  end
+
+  scenario 'an owner' do
+    FactoryGirl.create :project, hackday: @hackday
+    visit hackday_path(@hackday)
+    within(".projects") do
+      click_link 'Delete Project'
+    end
+    expect(Project.count).to eq(0)
+  end
+
+  scenario 'not an owner' do
+    @hackday_org.hackday_organizations_owners.destroy_all
+    project = FactoryGirl.create :project, hackday: @hackday
+    visit hackday_path(@hackday)
+    within '.projects' do
+      expect(page).to_not have_text('Delete Project')
+    end
   end
 end

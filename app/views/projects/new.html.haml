@@ -1,6 +1,6 @@
 %h1 New Project
 
-= form_for @project do |f|
+= form_for [@hackday, @project] do |f|
   - if @projects.any?
     %fieldset
       = select_tag 'existing_project_id', options_from_collection_for_select(@projects, 'id', 'name'), prompt: 'Select existing project'

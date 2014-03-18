@@ -6,7 +6,7 @@ def visit_hackday_org
   click_link hackday_org.name
 end
 
-feature 'Add hardware to hackday' do
+feature 'Feature: Add hardware to hackday' do
   scenario 'multiple selected' do
     hackday_org = FactoryGirl.create :hackday_organization
     hackday = FactoryGirl.create :hackday, hackday_organization: hackday_org
@@ -35,7 +35,7 @@ feature 'Add hardware to hackday' do
   end
 end
 
-feature 'add a hackday' do
+feature 'Feature: add a hackday' do
   scenario 'valid form data' do
     hackday_org = FactoryGirl.create :hackday_organization
     visit hackday_organizations_path

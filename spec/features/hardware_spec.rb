@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'listing hackday org hardware' do
+feature 'Feature: listing hackday org hardware' do
   scenario 'hardware created' do
     hdo = FactoryGirl.create :hackday_organization
     3.times.each { FactoryGirl.create(:hardware, hackday_organization: hdo) }
@@ -9,7 +9,7 @@ feature 'listing hackday org hardware' do
   end
 end
 
-feature 'Add hardware to organization' do
+feature 'Feature: Add hardware to organization' do
   scenario 'valid information' do
     hdo = FactoryGirl.create :hackday_organization
     visit hackday_organization_path(hdo)

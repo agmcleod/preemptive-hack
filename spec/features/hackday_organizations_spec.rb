@@ -6,7 +6,7 @@ def visit_hackday_org
   click_link hackday_org.name
 end
 
-feature 'Create hackday org' do
+feature 'Feature: Create hackday org' do
   def goto_new_page
     visit root_path
     click_link 'Hackday Organizations'
@@ -26,7 +26,7 @@ feature 'Create hackday org' do
   end
 end
 
-feature 'edit hackday org' do
+feature 'Feature: edit hackday org' do
   scenario 'owner edits with valid info' do
     hdo = FactoryGirl.create :hackday_organization
     visit hackday_organization_path(hdo)
@@ -52,7 +52,7 @@ feature 'edit hackday org' do
   end
 end
 
-feature 'add member to the organization' do
+feature 'Feature: add member to the organization' do
   scenario 'owner' do
     hdo = FactoryGirl.create :hackday_organization
     u = FactoryGirl.create :user
@@ -70,7 +70,7 @@ feature 'add member to the organization' do
   end
 end
 
-feature 'remove member from organization' do
+feature 'Feature: remove member from organization' do
   scenario 'owner' do
     hdo = FactoryGirl.create :hackday_organization
     u = FactoryGirl.create :user

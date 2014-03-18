@@ -1,6 +1,6 @@
 .project
   - if hackday.is_owner? current_user
-    %h4= link_to project.name, edit_project_path(project, hackday_id: hackday.id), id: "edit_project_#{project.id}_link"
+    %h4= link_to project.name, edit_hackday_project_path(hackday, project), id: "edit_project_#{project.id}_link"
   - else
     %h4= project.name
   %p= project.description

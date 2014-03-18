@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
 
   belongs_to :hackday
-  has_many :projects_hardware
+  has_many :projects_hardware, dependent: :destroy
   has_many :hardwares, through: :projects_hardware
   include ProjectDecorator
   validates :name, presence: true
