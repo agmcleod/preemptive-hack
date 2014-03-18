@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   validates_confirmation_of :password, if: :not_test_user
-  validates_presence_of     :password_digest, if: :not_test_user
+  validates_presence_of :password_digest, if: :not_test_user
 
   include InstanceMethodsOnActivation
 
@@ -20,8 +20,8 @@ class User < ActiveRecord::Base
   end
 
   validates :password, presence: true, on: :create, if: :not_test_user
-  validates :email, presence: true
-  validates :username, presence: true
+  validates :email, presence: true, format: /\A.+@.+\..+\z/i
+  validates :username, presence: true, uniqueness: true
 
   class << self
     def available_users(hackday_organization_id)
