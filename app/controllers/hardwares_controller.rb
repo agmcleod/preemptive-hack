@@ -1,5 +1,5 @@
 class HardwaresController < ApplicationController
-  before_filter :load_hackday_organization
+  before_filter :load_hackday_organization, except: [:index]
 
   def create
     check_ownership
@@ -14,6 +14,10 @@ class HardwaresController < ApplicationController
     else
       render :new
     end
+  end
+
+  def index
+    render json: Hardware.all.to_json
   end
 
   def new

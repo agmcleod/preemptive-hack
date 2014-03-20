@@ -9,7 +9,12 @@ class ApplicationController < ActionController::Base
 
   def current_user
     return if session[:user_id].blank?
-    @current_user ||= User.find session[:user_id]
+    user = User.find_by_id session[:user_id]
+    if user.nil?
+      redirect_to logout_url
+    else
+      @current_user ||= user
+    end
   end
 
   def login_as_guest
