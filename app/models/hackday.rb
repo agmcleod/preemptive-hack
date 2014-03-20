@@ -3,6 +3,9 @@ class Hackday < ActiveRecord::Base
   has_many :projects, dependent: :destroy
   has_many :hardwares_hackdays, class_name: HardwaresHackdays, dependent: :destroy
   has_many :hardwares, through: :hardwares_hackdays
+
+  delegate :name, to: :hackday_organization, prefix: true, allow_nil: true
+
   include HackdayDecorator
 
   validates :name, presence: true

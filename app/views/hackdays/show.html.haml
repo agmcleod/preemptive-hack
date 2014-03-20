@@ -1,3 +1,9 @@
+- content_for :breadcrumb do
+  %nav
+    %ul
+      %li= link_to @hackday.hackday_organization_name, hackday_organization_path(@hackday.hackday_organization)
+      %li= @hackday.name
+
 %h2= @hackday.name
 
 %p Starts at: #{@hackday.start_date_formatted}
