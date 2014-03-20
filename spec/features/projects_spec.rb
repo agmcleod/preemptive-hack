@@ -59,6 +59,25 @@ feature 'Feature: Edit Project' do
     expect(page).to have_content("Edited #{project.name}")
   end
 
+  scenario 'select hardware' do
+    %w(Arduino Leapmotion).each do |n|
+      hardware = FactoryGirl.create :hardware, name: n
+      @hackday_org.hardwares << hardware
+      @hackday.hardwares << hardware
+    end
+    @hackday.save
+    @hackday_org.save
+    project = FactoryGirl.create :project, hackday: @hackday
+    visit hackday_path(@hackday)
+    click_link project.name
+    check 'Leapmotion'
+    check 'Arduino'
+    click_button 'Save'
+    within '.projects' do
+      expect(page).to have_content('Arduino')
+    end
+  end
+
   scenario 'not an owner' do
     @hackday_org.hackday_organizations_owners.destroy_all
     project = FactoryGirl.create :project, hackday: @hackday

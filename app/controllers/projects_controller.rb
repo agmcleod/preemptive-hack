@@ -67,6 +67,6 @@ private
   end
 
   def project_params
-    params.require(:project).permit(:name, :description, :hackday_id, :hardware_ids)
+    params.require(:project).permit(:name, :description, :hackday_id, hardware_ids: [])
   end
 end
