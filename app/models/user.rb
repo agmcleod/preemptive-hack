@@ -8,9 +8,6 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
-  validates_confirmation_of :password, if: :not_test_user
-  validates_presence_of :password_digest, if: :not_test_user
-
   include InstanceMethodsOnActivation
 
   if respond_to?(:attributes_protected_by_default)
@@ -19,6 +16,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  before_validation :normalize_username
+
+  validates_confirmation_of :password, if: :not_test_user
+  validates_presence_of :password_digest, if: :not_test_user
   validates :password, presence: true, on: :create, if: :not_test_user
   validates :email, presence: true, format: /\A.+@.+\..+\z/i
   validates :username, presence: true, uniqueness: true
@@ -32,6 +33,10 @@ class User < ActiveRecord::Base
   end
 
 private
+
+  def normalize_username
+    self.username = self.username.downcase.gsub /\s/, ''
+  end
 
   def not_test_user
     !test_user

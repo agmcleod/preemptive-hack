@@ -43,7 +43,9 @@ feature 'Feature: edit hackday org' do
     hdo = FactoryGirl.create :hackday_organization
     hdo.owners.destroy_all
     visit hackday_organization_path(hdo)
-    expect(page).to_not have_content('Edit')
+    within('.hackday_organization') do
+      expect(page).to_not have_content('Edit')
+    end
   end
 
   scenario 'not an owner, should get redirected' do

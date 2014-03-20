@@ -1,15 +1,16 @@
 %h1= @hackday_organization.name
 
-- if @hackday_organization.is_owner? current_user
-  = link_to 'Edit', edit_hackday_organization_path(@hackday_organization)
-.hackdays
+.hackday_organization
   - if @hackday_organization.is_owner? current_user
-    %p= link_to 'Create New Hackday', new_hackday_organization_hackday_path(@hackday_organization)
+    = link_to 'Edit', edit_hackday_organization_path(@hackday_organization)
+  .hackdays
+    - if @hackday_organization.is_owner? current_user
+      %p= link_to 'Create New Hackday', new_hackday_organization_hackday_path(@hackday_organization)
 
-  %h3 Upcoming Hackdays:
-  %ul
-    - @hackday_organization.hackdays.each do |hackday|
-      %li= link_to hackday.name, [@hackday_organization, hackday]
+    %h3 Upcoming Hackdays:
+    %ul
+      - @hackday_organization.hackdays.each do |hackday|
+        %li= link_to hackday.name, [@hackday_organization, hackday]
 
 .members
   %h3 Members:
