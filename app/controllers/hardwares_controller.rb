@@ -4,7 +4,11 @@ class HardwaresController < ApplicationController
   def create
     check_ownership
     @hackday_organization = HackdayOrganization.find params[:hackday_organization_id]
-    @hackday_organization.hardwares.build(hardware_params)
+    if hardware = Hardware.find_by_name(hardware_params[:name])
+      @hackday_organization.hardwares << hardware
+    else
+      @hardware = @hackday_organization.hardwares.build(hardware_params)
+    end
     if @hackday_organization.save
       redirect_to @hackday_organization, notice: "Hardware item successfully added."
     else

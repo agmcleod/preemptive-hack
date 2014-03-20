@@ -19,12 +19,24 @@ feature 'Feature: Add hardware to organization' do
   background do
     login_for_feature
   end
+
   scenario 'valid information' do
     hdo = FactoryGirl.create :hackday_organization
     visit hackday_organization_path(hdo)
     click_link 'Add Hardware Item'
     fill_in 'Name', with: 'Raspberry Pi'
     click_button 'Add'
+    expect(hdo.hardwares.map(&:name)).to include('Raspberry Pi')
+  end
+
+  scenario 'hardware of same name for existing hardware should still work' do
+    hdo = FactoryGirl.create :hackday_organization
+    hardware = FactoryGirl.create :hardware
+    visit hackday_organization_path(hdo)
+    click_link 'Add Hardware Item'
+    fill_in 'Name', with: hardware.name
+    click_button 'Add'
+    expect(hdo.hardwares.map(&:name)).to include(hardware.name)
   end
 
   scenario 'not an owner, should get redirected' do
