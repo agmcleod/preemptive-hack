@@ -11,18 +11,19 @@ describe Hardware do
       end
 
       it 'should return 3' do
-        expect(Hardware.for_hackday_organization(@hackday_organization.id).size).to eq(3)
+        expect(Hardware.for_hackday_organization(@hackday_organization).size).to eq(3)
       end
     end
 
     context '2 for org' do
       before do
         3.times.each { FactoryGirl.create :hardware }
-        2.times.each { FactoryGirl.create :hardware, hackday_organization: @hackday_organization }
+        2.times.each { @hackday_organization.hardwares.build(FactoryGirl.attributes_for(:hardware)) }
+        @hackday_organization.save
       end
 
       it 'should return 3' do
-        expect(Hardware.for_hackday_organization(@hackday_organization.id).size).to eq(5)
+        expect(Hardware.for_hackday_organization(@hackday_organization).size).to eq(5)
       end
     end
   end

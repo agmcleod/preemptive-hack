@@ -3,7 +3,8 @@ class HackdayOrganization < ActiveRecord::Base
   has_many :users_hackday_organizations
   has_many :users, through: :users_hackday_organizations
   has_many :projects, through: :hackdays
-  has_many :hardwares, -> { order(:name) }
+  has_many :organization_hardwares
+  has_many :hardwares, -> { order(:name) }, through: :organization_hardwares
   has_many :hackday_organizations_owners
   has_many :owners, through: :hackday_organizations_owners, class_name: User, source: :user
 
