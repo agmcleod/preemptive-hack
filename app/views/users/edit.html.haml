@@ -1,0 +1,13 @@
+%h1 Update your information
+= form_for @user do |f|
+  - if @user.errors.any?
+    = errors_out @user
+  %fieldset
+    .field
+      = f.label :email, 'Email *'
+      = f.text_field :email
+    .field
+      = f.label :username, 'Username * (Your display name on the site)'
+      = f.text_field :username
+    .field
+      = f.submit 'Save', class: 'btn btn-primary'
