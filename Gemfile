@@ -11,12 +11,18 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.0.1'
 gem 'haml'
 gem 'haml-rails'
+gem 'puma'
+gem 'pg', :platforms => :ruby
+gem 'activerecord-jdbc-adapter', :platforms => :jruby
+gem 'activerecord-jdbcpostgresql-adapter', :platforms => :jruby
+gem 'therubyracer', :platforms => :ruby
+gem 'therubyrhino', :platforms => :jruby
+
 group :doc do
   gem 'sdoc', require: false
 end
 
 group :development, :test do
-  gem 'pg'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'faker'
