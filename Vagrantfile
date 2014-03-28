@@ -23,7 +23,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant-root", "1"]
   end
 
-  config.vm.provision :puppet
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = "puppet"
+    puppet.manifest_file = "default.pp"
+  end
 
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true

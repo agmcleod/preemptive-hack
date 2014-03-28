@@ -16,3 +16,4 @@
 /tmp
 coverage
 .vagrant
+vendor/bundle
