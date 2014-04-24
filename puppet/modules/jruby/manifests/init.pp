@@ -16,6 +16,13 @@ class jruby {
     require => Exec["jruby_download"],
   }
 
+  exec { "chwon_jruby":
+    cwd => '/home/vagrant',
+    path => $path,
+    command => "chown -RH vagrant:vagrant ${jruby_home}",
+    require => Exec["jruby_unzip"],
+  }
+
   exec { "add_jruby_to_path":
     cwd => "/home/vagrant",
     path => $path,
