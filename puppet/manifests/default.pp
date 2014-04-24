@@ -16,3 +16,4 @@ package { "openjdk-7-jre":
 include jruby
 include postgres
 include setup
+include puma
