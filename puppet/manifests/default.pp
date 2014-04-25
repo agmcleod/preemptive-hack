@@ -17,3 +17,4 @@ include jruby
 include postgres
 include setup
 include puma
+include nginx
