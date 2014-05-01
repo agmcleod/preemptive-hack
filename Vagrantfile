@@ -13,7 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/debian-73-x64-virtualbox-puppet.box"
   config.vm.hostname = "preemptivehack.vm"
 
-  config.vm.network "private_network", :ip => '192.168.1.105'
+  config.vm.network "private_network", :ip => '172.27.27.18'
 
   ######################################################################
   # shared application folder at /vagrant
@@ -23,11 +23,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant-root", "1"]
   end
 
-  config.vm.provision :puppet do |puppet|
-    puppet.manifests_path = "puppet/manifests"
-    puppet.module_path = "puppet/modules"
-    puppet.manifest_file = "default.pp"
-  end
+  # config.vm.provision :puppet do |puppet|
+  #   puppet.manifests_path = "puppet/manifests"
+  #   puppet.module_path = "puppet/modules"
+  #   puppet.manifest_file = "default.pp"
+  # end
+
+  config.vm.provision :shell, :path => "config/vagrant/setup.sh"
 
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true

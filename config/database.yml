@@ -1,13 +1,11 @@
 development:
-  adapter: jdbcpostgresql
+  adapter: postgresql
   encoding: unicode
   database: preemptivehack_development
-  host: localhost
-  pool: 5
+  username: vagrant
 
-test: &test
-  adapter: jdbcpostgresql
+test:
+  adapter: postgresql
   encoding: unicode
   database: preemptivehack_test
-  host: localhost
-  pool: 5
+  username: vagrant
