@@ -13,6 +13,10 @@ class Hackday < ActiveRecord::Base
   validates :hackday_organization, presence: true
   validate :start_before_end
 
+  def hackday_organization_hardwares
+    hackday_organization.hardwares
+  end
+
 private
   def start_before_end
     if end_date && start_date >= end_date

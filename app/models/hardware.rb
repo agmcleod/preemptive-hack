@@ -7,11 +7,4 @@ class Hardware < ActiveRecord::Base
   has_many :hackday_organizations, through: :organization_hardwares
 
   validates :name, presence: true, uniqueness: true
-
-  class << self
-    def for_hackday_organization(hackday_organization)
-      hardwares = hackday_organization.hardwares.to_a
-      (Hardware.where('id NOT IN ( SELECT hardware_id FROM organization_hardwares )').to_a + hardwares).sort { |a, b| a.name <=> b.name }
-    end
-  end
 end

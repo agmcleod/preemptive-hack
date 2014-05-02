@@ -34,6 +34,6 @@
   %h3 Hardware:
   - if @hackday_organization.is_member? current_user
     = link_to 'Add Hardware Item', new_hackday_organization_hardware_path(@hackday_organization)
-  - Hardware.for_hackday_organization(@hackday_organization).each do |hardware|
+  - @hackday_organization.hardwares.each do |hardware|
     %li= hardware.name
 = link_to 'Back to organizations', hackday_organizations_path

@@ -5,13 +5,13 @@ class Hackdays::HardwareController < ApplicationController
     if @hackday.sync_hardware(params[:hardware_ids])
       redirect_to @hackday, notice: "Hardware items added to hackday"
     else
-      @hardwares = Hardware.for_hackday_organization(@hackday.hackday_organization)
+      @hardwares = @hackday.hackday_organization_hardwares
       render :new
     end
   end
 
   def new
-    @hardwares = Hardware.for_hackday_organization(@hackday.hackday_organization)
+    @hardwares = @hackday.hackday_organization_hardwares
   end
 
 private
