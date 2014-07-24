@@ -39,6 +39,7 @@ ln -sf /vagrant/config/vhosts/development.conf /etc/nginx/conf.d/development.con
 PID=`cat /var/run/puma.pid`  
 if ps -p $PID > /dev/null
 then
+  # killing the process in this way forces a restart
   kill -s SIGUSR2 $PID
 else
   bundle exec puma -b unix:///var/run/preemptivehack.sock --pidfile /var/run/puma.pid -d

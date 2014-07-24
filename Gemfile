@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.0.0'
+gem 'rails', '~> 4.1.0'
 gem 'bcrypt'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
@@ -21,6 +21,11 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development do
+  gem 'spring'
+  gem 'spring-commands-rspec'
+end
+
 group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
@@ -31,7 +36,5 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'pry'
-  gem "spring"
-  gem 'spring-commands-rspec'
   gem 'simplecov', require: false
 end
