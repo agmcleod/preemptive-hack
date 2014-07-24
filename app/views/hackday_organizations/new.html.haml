@@ -1,3 +1,9 @@
+- content_for :breadcrumb do
+  %nav
+    %ul
+      %li= link_to 'Hackday Organizations', hackday_organizations_path
+      %li New
+
 %h1 New Hackday Organization
 
 = render 'form', hackday_organization: @hackday_organization

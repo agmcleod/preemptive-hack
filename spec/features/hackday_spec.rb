@@ -13,10 +13,12 @@ feature 'Feature: Add hardware to hackday' do
   scenario 'multiple selected' do
     hackday_org = FactoryGirl.create :hackday_organization
     hackday = FactoryGirl.create :hackday, hackday_organization: hackday_org
-    names = %w(printer mouse keyboard nintendo2ds).collect { |n| FactoryGirl.create(:hardware, name: n); n }
+    hardwares = %w(printer mouse keyboard nintendo2ds).collect { |n| FactoryGirl.create(:hardware, name: n) }
+    hardwares.each { |hardware| hackday_org.hardwares << hardware }
+    hackday_org.save
     visit hackday_path(hackday)
     click_link 'Edit Available Hardware'
-    names[0..2].each { |n| check n }
+    hardwares.map(&:name)[0..2].each { |n| check n }
     click_button 'Save'
     expect(page).to have_css('.hardware li', count: 3)
   end
