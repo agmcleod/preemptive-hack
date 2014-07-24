@@ -7,7 +7,7 @@ class SessionController < ApplicationController
       session[:user_id] = user.id
       redirect_to root_url, notice: "Logged In!"
     else
-      flash.now[:error] = "Your email address or password was incorrect. Please try again."
+      flash.now[:alert] = "Your email address or password was incorrect. Please try again."
       render :new
     end
   end

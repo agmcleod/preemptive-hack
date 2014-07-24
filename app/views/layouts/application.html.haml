@@ -11,6 +11,6 @@
         - if current_user
           = menu_item 'Edit My Info', edit_user_path(current_user.id)
           = menu_item 'Logout', logout_path, method: :delete
-    = bootstrap_flash
+    = flash_message
     = yield :breadcrumb
     = yield
