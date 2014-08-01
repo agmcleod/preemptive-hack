@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature 'Feature: New User' do
   scenario 'valid info, should be able to login' do

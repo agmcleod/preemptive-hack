@@ -13,7 +13,8 @@ gem 'haml'
 gem 'haml-rails'
 gem 'puma'
 gem 'pg', :platforms => :ruby
-gem 'activerecord-jdbcpostgresql-adapter', :platforms => :jruby
+gem 'activerecord-jdbc-adapter', '= 1.3.6', :platforms => :jruby
+gem 'activerecord-jdbcpostgresql-adapter', '= 1.3.6', :platforms => :jruby
 gem 'therubyracer', :platforms => :ruby
 gem 'therubyrhino', :platforms => :jruby
 

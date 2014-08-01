@@ -4,7 +4,7 @@ module HackdayDecorator
   end
 
   def has_hardware_id?(id)
-    hardwares_hackdays.collect(&:hardware_id).include?(id)
+    hardwares_hackdays.map(&:hardware_id).include?(id)
   end
 
   def is_member?(user)

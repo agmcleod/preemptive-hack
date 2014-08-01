@@ -1,11 +1,11 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe HackdayDecorator do
   describe '#has_hardware?' do
     it 'should have hardware with id 1' do
       hackday = Hackday.new
       hackday.hardwares_hackdays.build(hardware_id: 1)
-      expect(hackday.has_hardware?(Hardware.new(id: 1))).to be_true
+      expect(hackday.has_hardware?(Hardware.new(id: 1))).to be_truthy
     end
   end
 
@@ -16,12 +16,12 @@ describe HackdayDecorator do
     end
 
     it 'should have id 1' do
-      expect(@hackday.has_hardware_id?(1)).to be_true
+      expect(@hackday.has_hardware_id?(1)).to be_truthy
     end
 
 
     it 'should not have id 5' do
-      expect(@hackday.has_hardware_id?(5)).to be_false
+      expect(@hackday.has_hardware_id?(5)).to be_falsey
     end
   end
 
