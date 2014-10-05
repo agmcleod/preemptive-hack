@@ -8,7 +8,7 @@ describe Project do
     end
 
     it 'should have the same name' do
-      ProjectDecorator.stub find_or_return: @project
+      Project.stub find_or_return: @project
       p = Project.create_from_project(@project.id, nil)
       expect(p.name).to eq(@project.name)
     end

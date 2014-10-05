@@ -3,12 +3,11 @@ class Project < ActiveRecord::Base
   belongs_to :hackday
   has_many :projects_hardware, dependent: :destroy
   has_many :hardwares, through: :projects_hardware
-  include ProjectDecorator
   validates :name, presence: true
 
   class << self
     def create_from_project(id, hackday_id)
-      old_project = ProjectDecorator.find_or_return id
+      old_project = find_or_return id
       project = Project.new old_project.attributes.merge(hackday_id: hackday_id)
       project.id = nil
       Project.transaction do
@@ -27,5 +26,21 @@ class Project < ActiveRecord::Base
         Project.new project_params
       end
     end
+
+    def find_or_return(value)
+      if value.is_a? Numeric
+        Project.find value
+      else
+        value
+      end
+    end
+  end
+
+  def hackday_organization
+    hackday && hackday.hackday_organization
+  end
+
+  def has_hardware_id?(id)
+    hardwares.collect(&:id).include? id
   end
 end
