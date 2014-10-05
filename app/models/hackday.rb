@@ -6,15 +6,41 @@ class Hackday < ActiveRecord::Base
 
   delegate :name, to: :hackday_organization, prefix: true, allow_nil: true
 
-  include HackdayDecorator
-
   validates :name, presence: true
   validates :start_date, presence: true
   validates :hackday_organization, presence: true
   validate :start_before_end
 
+  def decorator
+    @decorator ||= HackdayDecorator.new(self)
+  end
+
   def hackday_organization_hardwares
     hackday_organization.hardwares
+  end
+
+  def has_hardware?(hardware)
+    has_hardware_id?(hardware.id)
+  end
+
+  def has_hardware_id?(id)
+    decorator.has_hardware_id?(id)
+  end
+
+  def is_member?(user)
+    decorator.is_member? user
+  end
+
+  def is_owner?(owner)
+    decorator.is_owner? owner
+  end
+
+  def start_date_formatted
+    decorator.start_date_formatted
+  end
+
+  def sync_hardware(ids_hash)
+    decorator.sync_hardware(ids_hash)
   end
 
 private

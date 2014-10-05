@@ -2,10 +2,10 @@ development:
   adapter: postgresql
   encoding: unicode
   database: preemptivehack_development
-  username: vagrant
+  username: aaronmcleod
 
 test:
   adapter: postgresql
   encoding: unicode
   database: preemptivehack_test
-  username: vagrant
+  username: aaronmcleod
