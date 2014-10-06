@@ -1,7 +1,6 @@
 - content_for :breadcrumb do
   %nav
-    %ul
-      %li= link_to 'Hackday Organizations', hackday_organizations_path
+    %ul.breadcrumb
       %li= link_to @hackday_organization.name, hackday_organization_path(@hackday_organization)
       %li New
 

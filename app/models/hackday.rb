@@ -15,6 +15,10 @@ class Hackday < ActiveRecord::Base
     @decorator ||= HackdayDecorator.new(self)
   end
 
+  def end_date_formatted
+    decorator.end_date_formatted
+  end
+
   def hackday_organization_hardwares
     hackday_organization.hardwares
   end

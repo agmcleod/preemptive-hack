@@ -6,7 +6,7 @@ Preemptivehack::Application.routes.draw do
   delete 'logout' => 'session#destroy', as: 'logout'
   get 'logout' => 'session#destroy'
 
-  resources :hackday_organizations, except: :destroy do
+  resources :hackday_organizations, except: [:destroy, :index] do
     resources :hackdays, except: [:destroy, :index]
     resources :hardwares, only: [:create, :new]
     resources :users, only: [:create, :destroy], controller: 'hackday_organizations/users'

@@ -4,6 +4,10 @@ class HackdayDecorator
     @hackday = hackday
   end
 
+  def end_date_formatted
+    @hackday.end_date.to_formatted_s(:db)
+  end
+
   def has_hardware_id?(id)
     @hackday.hardwares_hackdays.map(&:hardware_id).include?(id)
   end

@@ -1,0 +1,1 @@
+HackdayOrganization.find_or_create name: "Mosaic"

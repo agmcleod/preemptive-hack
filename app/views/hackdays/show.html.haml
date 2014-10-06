@@ -1,30 +1,43 @@
 - content_for :breadcrumb do
   %nav
-    %ul
-      %li= link_to 'Hackday Organizations', hackday_organizations_path
+    %ul.breadcrumb
       %li= link_to @hackday.hackday_organization_name, hackday_organization_path(@hackday.hackday_organization)
       %li= @hackday.name
 
-%h2= @hackday.name
 
-= link_to 'Edit', edit_hackday_organization_hackday_path(@hackday_organization, @hackday)
+%ul.nav.nav-tabs{ role: "tablist" }
+  %li.active
+    %a{ href: "#profile", role: "tab", "data-toggle" => "info" } Info
+  %li
+    %a{ href: "#message", role: "tab", "data-toggle" => "projects" } Projects
+  %li
+    %a{ href: "#settings", role: "tab", "data-toggle" => "hardware" } Hardware
 
-%p Starts at: #{@hackday.start_date_formatted}
+.tab-content
+  .tab-pane.info.active
+    %h2= @hackday.name
 
-%h3 Projects:
+    = link_to 'Edit', edit_hackday_organization_hackday_path(@hackday_organization, @hackday)
 
-- current_user_is_owner = @hackday.is_owner? current_user
-- if current_user_is_owner
-  = link_to 'Add Project', new_hackday_project_path(@hackday.id)
+    %p Starts at: #{@hackday.start_date_formatted}
+    %p Ends at: #{@hackday.end_date_formatted}
 
-.projects
-  - @hackday.projects.each do |project|
-    = render project, hackday: @hackday, show_delete: true, current_user_is_owner: current_user_is_owner
+  .tab-pane.projects
+    %h3 Projects:
 
-%h3 Hardware
+    - current_user_is_owner = @hackday.is_owner? current_user
+    - if current_user_is_owner
+      = link_to 'Add Project', new_hackday_project_path(@hackday.id)
 
-.hardwares
-  - @hackday.hardwares.each do |hardware|
-    = render hardware
-  - if @hackday.is_owner? current_user
-    = link_to 'Edit Available Hardware', new_hackday_hardware_path(@hackday)
+    .projects
+      - @hackday.projects.each do |project|
+        = render project, hackday: @hackday, show_delete: true, current_user_is_owner: current_user_is_owner
+
+  .tab-pane.hardware
+    %h3 Hardware
+
+    .hardwares
+      - @hackday.hardwares.each do |hardware|
+        = render hardware
+      - if @hackday.is_owner? current_user
+        = link_to 'Edit Available Hardware', new_hackday_hardware_path(@hackday)
