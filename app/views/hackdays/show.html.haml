@@ -5,16 +5,16 @@
       %li= @hackday.name
 
 
-%ul.nav.nav-tabs{ role: "tablist" }
+%ul.nav.nav-tabs{ role: "tablist", "data-tabs" => "tabs" }
   %li.active
-    %a{ href: "#profile", role: "tab", "data-toggle" => "info" } Info
+    %a{ href: "#profile-tab", role: "tab", "data-toggle" => "tab" } Info
   %li
-    %a{ href: "#message", role: "tab", "data-toggle" => "projects" } Projects
+    %a{ href: "#projects-tab", role: "tab", "data-toggle" => "tab" } Projects
   %li
-    %a{ href: "#settings", role: "tab", "data-toggle" => "hardware" } Hardware
+    %a{ href: "#hardware-tab", role: "tab", "data-toggle" => "tab" } Hardware
 
 .tab-content
-  .tab-pane.info.active
+  .tab-pane.active#profile-tab
     %h2= @hackday.name
 
     = link_to 'Edit', edit_hackday_organization_hackday_path(@hackday_organization, @hackday)
@@ -22,7 +22,7 @@
     %p Starts at: #{@hackday.start_date_formatted}
     %p Ends at: #{@hackday.end_date_formatted}
 
-  .tab-pane.projects
+  .tab-pane#projects-tab
     %h3 Projects:
 
     - current_user_is_owner = @hackday.is_owner? current_user
@@ -33,7 +33,7 @@
       - @hackday.projects.each do |project|
         = render project, hackday: @hackday, show_delete: true, current_user_is_owner: current_user_is_owner
 
-  .tab-pane.hardware
+  .tab-pane#hardware-tab
     %h3 Hardware
 
     .hardwares
